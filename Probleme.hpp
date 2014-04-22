@@ -4,9 +4,6 @@
 /* représente une instance du problème du voyageur de commerce. */
 /* les coordonnées sont des couples d'ints par défaut. */
 template<typename coord_t = int, int dim = 2>class Probleme {
-	/* liste de Ville du problème. */
-	std::vector<Ville> Tab;
-
 public:
 	class Ville {
 		coord_t C[dim];
@@ -32,6 +29,12 @@ public:
 			std::copy(v.C, v.C+dim, C); nom = v.nom;
 		}
 		
+		// opérateur d'affectation.
+		Ville& operator=(const Ville& v){
+			std::copy(v.C, v.C+dim, C); nom = v.nom;
+			return *this;
+		}
+
 		/* calcule la distance entre 2 villes. */
 		coord_t distance(const Ville& v) const {
 			coord_t sum = 0;
@@ -51,7 +54,11 @@ public:
 			return out;
 		}
 	};
+private:
+	/* liste de Ville du problème. */
+	std::vector<Ville> Tab;
 
+public:
 	/* renvoit le nombre de villes. */
 	ssize_t len() const { return Tab.size(); }
 
