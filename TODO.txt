@@ -1,0 +1,14 @@
+class Interface {
+	class Chemin {
+		...
+	}
+	Probleme<> P;
+
+
+
+
+-----> Comment lier le Probleme, l'Algo et l'Interface ?
+			^
+			|
+			|
+			`- architecture MVC ?
