@@ -24,8 +24,13 @@ bool Chromosome::operator<(const Chromosome& c) const {
 	return fit < c.fit;
 }
 
+/* opérateur de croisement */
+Chromosome Chromosome::operator+(const Chromosome& c){
+	return melange(c);
+}
+
 /* Croise 2 Chromosomes pour en faire un troisième. */
-Chromosome Chromosome::melange(const Chromosome& c, int pivot = -1) const {
+Chromosome Chromosome::melange(const Chromosome& c, int pivot /* = -1 */) const {
 	Chromosome d(*this);
 	if(pivot == -1) pivot = std::rand() % size();
 	std::copy(c.begin()+pivot, c.end(), d.begin()+pivot);

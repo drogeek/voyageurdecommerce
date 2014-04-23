@@ -1,3 +1,6 @@
+#ifndef _VILLE_H
+#define _VILLE_H
+
 #include <iostream>
 #include <numeric>
 #include <algorithm>
@@ -40,3 +43,5 @@ public:
 
 	friend class Interface;
 };
+
+#endif

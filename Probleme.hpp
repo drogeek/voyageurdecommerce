@@ -1,3 +1,6 @@
+#ifndef _PROBLEME_H
+#define _PROBLEME_H
+
 #include <numeric>
 #include <algorithm>
 #include <vector>
@@ -34,3 +37,5 @@ public:
 
 	Ville& operator[](int i);
 };
+
+#endif

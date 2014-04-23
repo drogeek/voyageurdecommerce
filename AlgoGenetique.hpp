@@ -1,22 +1,22 @@
+#ifndef _ALGOGENETIQUE_H
+#define _ALGOGENETIQUE_H
+
 #include <iostream>
 #include <cstdlib>
 
 #include "Probleme.hpp"
 
-class AlgoGenetique{
-	Probleme& p;
-	ssize_t taille;
+class Chromosome;
 
-	Chromosome *T;
-	ssize_t PopSize;
+class AlgoGenetique: public MyArray<Chromosome> {
+	Probleme& p;
+	const ssize_t taille;
+
 	float Eugenism;
 
 public:
 	// Constructeurs
-	AlgoGenetique(Probleme& _p, float eug = 0.2);
-
-	// initialisation
-	void init(int _PopSize);
+	AlgoGenetique(Probleme& _p, ssize_t PopSize, float eug = 0.2);
 
 	/* Avance d'une itération dans l'algorithme */
 	void step();
@@ -27,3 +27,5 @@ public:
 	/* simple wrapper pour accéder à la distance entre deux villes. */
 	coord_t distance(int i, int j) const;
 };
+
+#endif

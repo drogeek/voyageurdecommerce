@@ -2,46 +2,41 @@
 #include <cstdlib>
 
 #include "Probleme.hpp"
+#include "Chromosome.hpp"
+#include "MyArray.hpp"
 
 // Constructeurs
-AlgoGenetique::AlgoGenetique(Probleme& _p, float eug = 0.2): p(_p), T(NULL), PopSize(0), Eugenism(eug), taille(_p.len()) {}
-
-// initialisation
-void AlgoGenetique::init(int _PopSize){
-	PopSize = _PopSize;
-	T = new Chromosome[PopSize];
-	for(int i = 0;i<PopSize;i++)
-		T[i] = Chromosome::rand();
+AlgoGenetique::AlgoGenetique(Probleme& _p, ssize_t PopSize, float eug /* = 0.2 */):
+	MyArray(PopSize), p(_p), taille(_p.len()), Eugenism(eug) {
+		for(int i = 0;i<PopSize;i++)
+			(*this)[i] = Chromosome::rand(this, taille);
 }
 
 /* Avance d'une itération dans l'algorithme */
 void AlgoGenetique::step(){
-	std::sort(T, T+PopSize);
-	
-	Chromosome NewPop = new Chromosome[PopSize];
-	int i = PopSize*Eugenism;
+	std::sort(begin(), end());
+
+	MyArray<Chromosome> NewPop(size());
+	int i = size()*Eugenism;
 	/* on va garder les i meilleurs elements */
-	std::copy(T, T+i, NewPop);
+	std::copy(begin(), begin()+i, NewPop.begin());
 	/* puis, pour le reste */
-	for(; i < PopSize; i++){
-		int  j, i = std::rand()%PopSize,
-			k = std::rand()%size;
+	for(; i < size(); i++){
+		int  j, i = std::rand()%size();
 		do{
-			j = std::rand()%PopSize;
+			j = std::rand()%size();
 		}while(i == j);
-		NewPop[i] = T[i].melange(T[j], k);
+		NewPop[i] = (*this)[i] + (*this)[j];
 	}
-	delete[] T;
-	T = NewPop;
+	MyArray<Chromosome>::operator=(NewPop);
 }
 
 /* renvoit le meilleur individu à l'étape courante */
 Chromosome AlgoGenetique::best() const {
-	return *std::min_element(T, T+PopSize);
+	return *std::min_element(begin(), end());
 }
 
 /* simple wrapper pour accéder à la distance entre deux villes. */
 coord_t AlgoGenetique::distance(int i, int j) const {
 	return p.distance(i, j);
 }
-};

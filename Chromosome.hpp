@@ -4,10 +4,8 @@
 #include <iostream>
 #include <cstdlib>
 
-class Chromosome;
-
-#include "AlgoGenetique.hpp"
 #include "MyArray.hpp"
+#include "AlgoGenetique.hpp"
 
 class Chromosome: public MyArray<int> {
 	coord_t fit;
@@ -30,8 +28,11 @@ public:
 	/* opérateur de comparaison */
 	bool operator<(const Chromosome& c) const;
 
+	/* opérateur de croisement */
+	Chromosome operator+(const Chromosome& c);
+
 	/* Croise 2 Chromosomes pour en faire un troisième. */
-	Chromosome melange(const Chromosome& c, int pivot /* = -1 */) const;
+	Chromosome melange(const Chromosome& c, int pivot = -1) const;
 
 	/* mute un Chromosome en-place. */
 	void mutation(void);
