@@ -7,7 +7,7 @@
 #include <vector>
 
 /* les coordonnées sont des couples d'ints par défaut. */
-typedef unsigned int coord_t;
+typedef int coord_t;
 #define DIM 2
 
 class Ville {

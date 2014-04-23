@@ -1,6 +1,7 @@
 #include <numeric>
 #include <algorithm>
 #include <vector>
+#include <cmath>
 
 #include "Ville.hpp"
 
@@ -38,7 +39,7 @@ coord_t Ville::distance(const Ville& v) const {
 		int delta = content[i] - v.content[i];
 		sum += delta*delta;
 	}
-	return sum;
+	return sqrt(sum);
 }
 
 /* affiche une ville. */

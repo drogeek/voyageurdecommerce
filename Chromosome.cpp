@@ -1,6 +1,7 @@
 #include "Chromosome.hpp"
 #include "AlgoGenetique.hpp"
 #include <algorithm>
+#include <cassert>
 
 // Constructeur vide non-initialisé
 Chromosome::Chromosome(): MyArray(), fit(-1), parent(NULL) {}
@@ -9,10 +10,11 @@ Chromosome::Chromosome(): MyArray(), fit(-1), parent(NULL) {}
 Chromosome::Chromosome(ssize_t _len): MyArray(_len), fit(-1), parent(NULL) {}
 
 // Constructeur par copie
-Chromosome::Chromosome(const Chromosome& c): MyArray(c), fit(c.fit), parent(c.parent) {}
+Chromosome::Chromosome(const Chromosome& c): MyArray(c), fit(c.fit), parent(c.parent) { assert(c.fit != -1); }
 
 /* opérateur d'affectation */
 Chromosome& Chromosome::operator=(const Chromosome& c){
+	assert(c.fit != -1);
 	if(&c != this){
 		MyArray::operator=(c);
 		parent = c.parent;
@@ -22,6 +24,8 @@ Chromosome& Chromosome::operator=(const Chromosome& c){
 
 /* opérateur de comparaison */
 bool Chromosome::operator<(const Chromosome& c) const {
+	assert(fit != -1);
+	assert(c.fit != -1);
 	return fit < c.fit;
 }
 
@@ -51,6 +55,7 @@ void Chromosome::mutation(void){
 	int i = std::rand()%size(),
 	    j = std::rand()%size();
 	std::swap((*this)[i], (*this)[j]);
+	fitness();
 }
 
 /* surcharge de l'opérateur << pour afficher un Chromosome. */
