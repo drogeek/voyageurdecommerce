@@ -4,8 +4,10 @@
 #include <iostream>
 #include <cstdlib>
 
+#include "Probleme.hpp"
 #include "MyArray.hpp"
-#include "AlgoGenetique.hpp"
+
+class AlgoGenetique;
 
 class Chromosome: public MyArray<int> {
 	coord_t fit;
@@ -27,6 +29,7 @@ public:
 
 	/* opérateur de comparaison */
 	bool operator<(const Chromosome& c) const;
+	bool operator==(const Chromosome& c) const;
 
 	/* opérateur de croisement */
 	Chromosome operator+(const Chromosome& c);

@@ -1,4 +1,5 @@
 #include "Chromosome.hpp"
+#include "AlgoGenetique.hpp"
 #include <algorithm>
 
 // Constructeur vide non-initialisé
@@ -22,6 +23,12 @@ Chromosome& Chromosome::operator=(const Chromosome& c){
 /* opérateur de comparaison */
 bool Chromosome::operator<(const Chromosome& c) const {
 	return fit < c.fit;
+}
+
+bool Chromosome::operator==(const Chromosome& c) const {
+	for(int i = 0;i<size();i++)
+		if((*this)[i] != c[i]) return false;
+	return true;
 }
 
 /* opérateur de croisement */

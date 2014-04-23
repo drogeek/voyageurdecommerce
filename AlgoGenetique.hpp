@@ -5,8 +5,7 @@
 #include <cstdlib>
 
 #include "Probleme.hpp"
-
-class Chromosome;
+#include "Chromosome.hpp"
 
 class AlgoGenetique: public MyArray<Chromosome> {
 	Probleme& p;

@@ -7,17 +7,14 @@
 using namespace std;
 
 int main(void){
-	ifstream f("villes.txt");
-	Probleme P;
-
-	f >> P;
+	Probleme P = Probleme::rand(20);
 
 	cout << P;
 
 	AlgoGenetique A(P, 100, 0.2);
-	for(i = 0;i<100;i++){
+	for(int i = 0;i<100;i++){
 		A.step();
-		cout << A.best();
+		cout << A.best() << endl;
 	}
 
 	return 0;

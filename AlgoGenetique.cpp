@@ -1,9 +1,10 @@
 #include <iostream>
 #include <cstdlib>
+#include <cassert>
 
 #include "Probleme.hpp"
-#include "Chromosome.hpp"
 #include "MyArray.hpp"
+#include "AlgoGenetique.hpp"
 
 // Constructeurs
 AlgoGenetique::AlgoGenetique(Probleme& _p, ssize_t PopSize, float eug /* = 0.2 */):
@@ -22,11 +23,11 @@ void AlgoGenetique::step(){
 	std::copy(begin(), begin()+i, NewPop.begin());
 	/* puis, pour le reste */
 	for(; i < size(); i++){
-		int  j, i = std::rand()%size();
+		int  j, k = std::rand()%size();
 		do{
 			j = std::rand()%size();
-		}while(i == j);
-		NewPop[i] = (*this)[i] + (*this)[j];
+		}while(k == j);
+		NewPop[i] = (*this)[j] + (*this)[k];
 	}
 	MyArray<Chromosome>::operator=(NewPop);
 }
