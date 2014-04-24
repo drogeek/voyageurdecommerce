@@ -33,7 +33,7 @@ void AlgoGenetique::step(){
 }
 
 /* renvoit le meilleur individu à l'étape courante */
-Chromosome AlgoGenetique::best() const {
+Chromosome& AlgoGenetique::best() const {
 	return *std::min_element(begin(), end());
 }
 

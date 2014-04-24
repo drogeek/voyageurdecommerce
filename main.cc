@@ -6,21 +6,11 @@
 
 #include "AlgoGenetique.hpp"
 #include "Chromosome.hpp"
+#include "GUI.hpp"
 
 using namespace std;
 
-void afficher_mat(Probleme& P){
-	for(int i = 0;i<P.len();i++){
-		for(int j = 0;j<P.len();j++)
-			printf("%3d  ", P.distance(i, j));
-		putchar('\n');
-	}
-}
-
-
-	
-
-int main(void){
+int main(int argc, char **argv){
 	srand(time(NULL));
 	int nVilles = 5;
 	Probleme P = Probleme::rand(nVilles);
@@ -30,10 +20,8 @@ int main(void){
 
 	f >> P2;
 	AlgoGenetique A(P2, 1000);
-	for(int i = 0;i<10;i++){
-		for(int j = 0;j<10;j++) A.step();
-		cout << A.best() << endl;
-	}
+	GUI G(A, P2, &argc, argv, "Hello", 550, 650);
+	G.run();
 
 	return 0;
 }

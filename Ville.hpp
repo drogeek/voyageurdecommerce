@@ -10,11 +10,13 @@
 typedef int coord_t;
 #define DIM 2
 
+class Interface;
+
 class Ville {
+public:
 	coord_t content[DIM];
 	std::string nom;
 
-public:
 	/* Constructeurs */
 
 	// Depuis un flux.

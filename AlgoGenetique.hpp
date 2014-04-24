@@ -21,7 +21,7 @@ public:
 	void step();
 		
 	/* renvoit le meilleur individu à l'étape courante */
-	Chromosome best() const;
+	Chromosome& best() const;
 
 	/* simple wrapper pour accéder à la distance entre deux villes. */
 	coord_t distance(int i, int j) const;
