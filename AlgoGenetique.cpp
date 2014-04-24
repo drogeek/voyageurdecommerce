@@ -28,6 +28,7 @@ void AlgoGenetique::step(){
 			j = std::rand()%size();
 		}while(k == j);
 		NewPop[i] = (*this)[j] + (*this)[k];
+		NewPop[i].mutation();
 	}
 	MyArray<Chromosome>::operator=(NewPop);
 }
