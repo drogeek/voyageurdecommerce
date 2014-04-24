@@ -11,6 +11,7 @@
 class Probleme {
 	/* liste de Ville du problème. */
 	std::vector<Ville> Tab;
+	std::vector<std::vector<coord_t>> mat;
 
 public:
 	/* renvoit un itérateur constant sur Tab */
@@ -36,6 +37,9 @@ public:
 	static Probleme rand(ssize_t len);
 
 	Ville& operator[](int i);
+
+private:
+	void recalc(void);
 };
 
 #endif

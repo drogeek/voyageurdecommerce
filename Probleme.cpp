@@ -1,6 +1,7 @@
 #include <numeric>
 #include <algorithm>
 #include <vector>
+#include <cassert>
 
 #include "Probleme.hpp"
 
@@ -18,6 +19,7 @@ ssize_t Probleme::len() const { return Tab.size(); }
 /* ajouter une ville. */
 Probleme& Probleme::operator+=(const Ville& v){
 	Tab.push_back(v);
+	recalc();
 	return *this;
 }
 
@@ -25,9 +27,10 @@ Probleme& Probleme::operator+=(const Ville& v){
 std::istream& operator>>(std::istream& in, Probleme& p){
 	while(! in.eof()){
 		Ville v(in);
-		p += v;
+		p.Tab.push_back(v);
 	}
 	p.Tab.pop_back(); // correctif temporaire de bug.
+	p.recalc();
 	return in;
 }
 
@@ -41,7 +44,8 @@ std::ostream& operator<<(std::ostream& out, Probleme& p){
 
 /* renvoit la distance entre deux villes. */
 coord_t Probleme::distance(int i, int j) const {
-	return Tab[i].distance(Tab[j]);
+	//assert(Tab[i].distance(Tab[j]) == mat[i][j]);
+	return mat[i][j];
 }
 
 /* Génère une instance aléatoire du problème. */
@@ -49,9 +53,22 @@ Probleme Probleme::rand(ssize_t len){
 	Probleme P;
 	for(int i = 0;i<len;i++)
 		P += Ville::rand();
+	P.recalc();
 	return P;
 }
 
 Ville& Probleme::operator[](int i){
 	return Tab[i];
+}
+
+void Probleme::recalc(void){
+	ssize_t l = len();
+
+	mat.clear();
+	for(int i = 0;i<l;i++){
+		std::vector<coord_t> tmp;
+		for(int j = 0;j<l;j++)
+			tmp.push_back(Tab[i].distance(Tab[j]));
+		mat.push_back(tmp);
+	}
 }
