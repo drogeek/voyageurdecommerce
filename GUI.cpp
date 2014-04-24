@@ -25,8 +25,10 @@ void GUI::Afficher_Infos(void){
 }
 
 int GUI::Avancer(void){
+	cng_clear_screen();
 	Afficher_Villes();
 	Afficher_Infos();
+	cng_swap_screen();
 	A.step();
 	Chromosome& meilleur = A.best();
 	cng_current_color(0, 1, 0);
@@ -40,3 +42,5 @@ int GUI::Avancer(void){
 void GUI::run(void){
 	cng_main_loop();
 }
+
+GUI* GUI::instance = NULL;

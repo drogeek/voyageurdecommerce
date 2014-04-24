@@ -1,5 +1,5 @@
 CC=g++
-SRC=chromosome.cpp gene.cpp population.cpp main.cpp interface.cpp
+SRC=AlgoGenetique.cpp Chromosome.cpp GUI.cpp Interface.cpp Probleme.cpp Ville.cpp main.cc
 OBJ=$(SRC:.cpp=.o)
 CPPFLAGS=-Wall -Wextra -std=c++0x -O3
 LDFLAGS=-lcng -lglut -lGLU -lGL -lX11 -lm
